@@ -18,12 +18,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// Route pour l'upload d'images
-Route::post('/upload-image', [App\Http\Controllers\ImageUploadController::class, 'upload']);
-
 // Template management API routes - moved from web.php for better AJAX handling
 Route::get('/templates', [App\Http\Controllers\Api\TemplateController::class, 'list']);
-Route::post('/templates', [App\Http\Controllers\Api\TemplateController::class, 'store'])->name('builderjs.upload-template');
+Route::post('/templates', [App\Http\Controllers\Api\TemplateController::class, 'store']);
 Route::post('/templates/create-empty', [App\Http\Controllers\Api\TemplateController::class, 'createEmpty']);
 Route::post('/templatesupd/{template}', [App\Http\Controllers\Api\TemplateController::class, 'update']);
 Route::put('/templatesupd/{template}', [App\Http\Controllers\Api\TemplateController::class, 'update']);

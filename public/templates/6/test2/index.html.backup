@@ -387,6 +387,10 @@
 
             
                 
+            
+                
+            
+                
             </head>
 <body class="builderjs-layout">
 
@@ -398,9 +402,12 @@
 
 
 <div builder-element="PageElement" style="padding: 20px;" class="">
-<nav builder-element="BlockElement" class="">
+<div builder-element="BlockElement" style="padding-top: 15px; padding-bottom: 15px; opacity: 1;" class="">
+                        <div class="container">
+                        <img builder-element="" class="" src="/storage/uploads/sDwlePIDO2iIzl1ebgH8t7PeN5Y6wmFhP3a9X9XF.png" style="width: 100%;"></div>
+                    </div><nav builder-element="BlockElement" class="">
             <div class="logo" builder-element="BlockElement">
-                <img src="/api/template/6/images/Sc.png" alt="Logo Restaurant" builder-element="">
+                <img src="/api/template/6/images/Sc.png" alt="Logo Restaurant" builder-element="" class="" style="width: auto; height: auto;">
             </div>
             <ul class="nav-links" builder-element="ListElement">
                 <li builder-element="TextElement" class="">Home</li>
@@ -415,7 +422,7 @@
                 <div class="line3" builder-element="BlockElement"></div>
             </div>
         </nav><main builder-element="BlockElement">
-        <section id="accueil" class="hero" builder-element="BlockElement">
+        <section id="accueil" class="hero" builder-element="BlockElement" style="background-color: rgb(161, 27, 27);">
             <div class="hero-content" builder-element="BlockElement">
                 <h1 class="builder-content" builder-element="TextElement">La Table Gourmande</h1>
                 <p class="builder-content" builder-element="TextElement">Une expérience gastronomique unique au cœur de la ville</p>
@@ -423,7 +430,7 @@
             </div>
         </section>
 
-        <section id="menu" class="menu" builder-element="BlockElement">
+        <section id="menu" class="menu" builder-element="BlockElement" style="background-color: rgb(198, 93, 93);">
             <h2 class="builder-content" builder-element="TextElement">Notre Menu</h2>
             <div class="menu-grid" builder-element="BlockElement">
                 <div class="menu-category fade-in visible" builder-element="BlockElement">

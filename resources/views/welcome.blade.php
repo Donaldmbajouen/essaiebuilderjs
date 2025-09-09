@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta http-equiv="Permissions-Policy" content="unload=()">
     <title>Laravel Builder</title>
 
     <!-- BuilderJS CSS -->
@@ -43,17 +44,32 @@
             root: '{{ asset('vendor/builderjs') }}',
             url: (!isNewTemplate && templateId) ? '/api/template/' + templateId : null,
             container: 'builderjs-editor',
+            uploadAssetUrl: BUILDERJS_CONFIG.uploadImageUrl,
+            uploadAssetMethod: 'POST',
             upload: {
-                uploadUrl: BUILDERJS_CONFIG.uploadImageUrl,
-                uploadAsync: true,
-                uploadMethod: 'POST',
-                uploadParamName: 'file',
-                uploadTimeout: 30000,
-                uploadHeaders: {
+                url: BUILDERJS_CONFIG.uploadImageUrl,
+                method: 'POST',
+                paramName: 'file',
+                timeout: 30000,
+                headers: {
                     'X-CSRF-TOKEN': BUILDERJS_CONFIG.csrfToken
+                },
+                success: function(response) {
+                    console.log('Upload success:', response);
+                    if (typeof response === 'string') {
+                        try {
+                            response = JSON.parse(response);
+                        } catch (e) {
+                            console.error('Failed to parse response:', e);
+                        }
+                    }
+                    return response.url || response.path || response;
+                },
+                error: function(error) {
+                    console.error('Upload error:', error);
+                    alert('Erreur lors de l\'upload de l\'image');
                 }
             },
-            uploadTemplateUrl: '{{ route("builderjs.upload-template") }}',
             url: (!isNewTemplate && templateId) ? '/api/template/' + templateId : null,
             allowExternalResources: true,
             corsEnabled: true,
@@ -82,83 +98,5 @@
         // Initialize the builder with template
         builder.init();
     </script>
-
-<!-- Upload image (Option B) - Bouton Remplacer image + sélection dans iframe -->
-<script>
-    const csrf = BUILDERJS_CONFIG.csrfToken || '';
-
-    const replaceBtn = document.createElement('button');
-    replaceBtn.textContent = '🖼️ Remplacer l\'image';
-    replaceBtn.className = 'save-button';
-    replaceBtn.style.right = '200px';
-    document.body.appendChild(replaceBtn);
-
-    let lastClickedImg = null;
-
-    function attachIframeListeners() {
-        const iframe = document.querySelector('iframe');
-        if (!iframe) return;
-        try {
-            const idoc = iframe.contentWindow?.document;
-            if (!idoc) return;
-            idoc.addEventListener('click', (e) => {
-                const el = e.target;
-                if (el && el.tagName && el.tagName.toUpperCase() === 'IMG') {
-                    lastClickedImg = el;
-                }
-            }, true);
-        } catch (_) {}
-    }
-
-    const iframeInterval = setInterval(() => {
-        if (document.querySelector('iframe')) {
-            clearInterval(iframeInterval);
-            attachIframeListeners();
-        }
-    }, 300);
-
-    replaceBtn.addEventListener('click', async () => {
-        try {
-            if (!currentTemplateId) {
-                alert('Aucun template chargé');
-                return;
-            }
-            if (!lastClickedImg) {
-                alert('Cliquez d\'abord sur une image dans l\'éditeur');
-                return;
-            }
-
-            const input = document.createElement('input');
-            input.type = 'file';
-            input.accept = 'image/*';
-            input.onchange = async (e) => {
-                const file = e.target.files?.[0];
-                if (!file) return;
-
-                const fd = new FormData();
-                fd.append('file', file);
-
-                const resp = await fetch('/api/template/' + currentTemplateId + '/assets', {
-                    method: 'POST',
-                    body: fd,
-                    headers: {
-                        'Accept': 'application/json',
-                        'X-CSRF-TOKEN': csrf
-                    }
-                });
-
-                const data = await resp.json();
-                if (!resp.ok || !data?.success || !data?.url) {
-                    throw new Error(data?.message || 'Upload échoué');
-                }
-                lastClickedImg.setAttribute('src', data.url);
-            };
-            input.click();
-        } catch (err) {
-            console.error(err);
-            alert('Erreur upload: ' + err.message);
-        }
-    });
-</script>
 </body>
 </html>

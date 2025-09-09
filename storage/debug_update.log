@@ -207,3 +207,37 @@
     "raw_length": 28900
 }
 
+{
+    "timestamp": "2025-09-09T15:26:51.698653Z",
+    "template_id": 6,
+    "method": "POST",
+    "has_html_content": false,
+    "html_content_length": 0,
+    "has_content": true,
+    "content_length": 23667,
+    "content_type": "application\/x-www-form-urlencoded; charset=UTF-8",
+    "all_keys": [
+        "_token",
+        "content",
+        "_method"
+    ],
+    "raw_length": 29370
+}
+
+{
+    "timestamp": "2025-09-09T15:30:46.222195Z",
+    "template_id": 6,
+    "method": "POST",
+    "has_html_content": false,
+    "html_content_length": 0,
+    "has_content": true,
+    "content_length": 23570,
+    "content_type": "application\/x-www-form-urlencoded; charset=UTF-8",
+    "all_keys": [
+        "_token",
+        "content",
+        "_method"
+    ],
+    "raw_length": 29231
+}
+
