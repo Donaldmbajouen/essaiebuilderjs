@@ -1,0 +1,209 @@
+{
+    "timestamp": "2025-09-08T15:27:03.516730Z",
+    "template_id": 1,
+    "method": "POST",
+    "has_html_content": false,
+    "html_content_length": 0,
+    "all_keys": [
+        "_token",
+        "content",
+        "_method"
+    ]
+}
+
+{
+    "timestamp": "2025-09-08T15:27:06.049350Z",
+    "template_id": 1,
+    "method": "POST",
+    "has_html_content": false,
+    "html_content_length": 0,
+    "all_keys": [
+        "_token",
+        "content",
+        "_method"
+    ]
+}
+
+{
+    "timestamp": "2025-09-08T15:31:27.895462Z",
+    "template_id": 1,
+    "method": "POST",
+    "has_html_content": false,
+    "html_content_length": 0,
+    "all_keys": [
+        "_token",
+        "content",
+        "_method"
+    ]
+}
+
+{
+    "timestamp": "2025-09-08T15:52:19.189619Z",
+    "template_id": 1,
+    "method": "POST",
+    "has_html_content": false,
+    "html_content_length": 0,
+    "has_content": true,
+    "content_length": 23500,
+    "content_type": "application\/x-www-form-urlencoded; charset=UTF-8",
+    "all_keys": [
+        "_token",
+        "content",
+        "_method"
+    ],
+    "raw_length": 29165
+}
+
+{
+    "timestamp": "2025-09-08T15:55:35.600166Z",
+    "template_id": 1,
+    "method": "POST",
+    "has_html_content": false,
+    "html_content_length": 0,
+    "has_content": true,
+    "content_length": 23542,
+    "content_type": "application\/x-www-form-urlencoded; charset=UTF-8",
+    "all_keys": [
+        "_token",
+        "content",
+        "_method"
+    ],
+    "raw_length": 29211
+}
+
+{
+    "timestamp": "2025-09-08T15:58:12.283102Z",
+    "template_id": 1,
+    "method": "POST",
+    "has_html_content": false,
+    "html_content_length": 0,
+    "has_content": true,
+    "content_length": 23600,
+    "content_type": "application\/x-www-form-urlencoded; charset=UTF-8",
+    "all_keys": [
+        "_token",
+        "content",
+        "_method"
+    ],
+    "raw_length": 29273
+}
+
+{
+    "timestamp": "2025-09-09T08:43:06.615041Z",
+    "template_id": 3,
+    "method": "POST",
+    "has_html_content": false,
+    "html_content_length": 0,
+    "has_content": true,
+    "content_length": 23688,
+    "content_type": "application\/x-www-form-urlencoded; charset=UTF-8",
+    "all_keys": [
+        "_token",
+        "content",
+        "_method"
+    ],
+    "raw_length": 29333
+}
+
+{
+    "timestamp": "2025-09-09T09:40:32.166510Z",
+    "template_id": 6,
+    "method": "POST",
+    "has_html_content": false,
+    "html_content_length": 0,
+    "has_content": true,
+    "content_length": 23363,
+    "content_type": "application\/x-www-form-urlencoded; charset=UTF-8",
+    "all_keys": [
+        "_token",
+        "content",
+        "_method"
+    ],
+    "raw_length": 28976
+}
+
+{
+    "timestamp": "2025-09-09T09:40:54.095057Z",
+    "template_id": 6,
+    "method": "POST",
+    "has_html_content": false,
+    "html_content_length": 0,
+    "has_content": true,
+    "content_length": 23309,
+    "content_type": "application\/x-www-form-urlencoded; charset=UTF-8",
+    "all_keys": [
+        "_token",
+        "content",
+        "_method"
+    ],
+    "raw_length": 28892
+}
+
+{
+    "timestamp": "2025-09-09T09:41:10.368042Z",
+    "template_id": 6,
+    "method": "POST",
+    "has_html_content": false,
+    "html_content_length": 0,
+    "has_content": true,
+    "content_length": 23230,
+    "content_type": "application\/x-www-form-urlencoded; charset=UTF-8",
+    "all_keys": [
+        "_token",
+        "content",
+        "_method"
+    ],
+    "raw_length": 28769
+}
+
+{
+    "timestamp": "2025-09-09T09:41:19.683203Z",
+    "template_id": 6,
+    "method": "POST",
+    "has_html_content": false,
+    "html_content_length": 0,
+    "has_content": true,
+    "content_length": 23230,
+    "content_type": "application\/x-www-form-urlencoded; charset=UTF-8",
+    "all_keys": [
+        "_token",
+        "content",
+        "_method"
+    ],
+    "raw_length": 28769
+}
+
+{
+    "timestamp": "2025-09-09T10:25:09.746290Z",
+    "template_id": 6,
+    "method": "POST",
+    "has_html_content": false,
+    "html_content_length": 0,
+    "has_content": true,
+    "content_length": 23141,
+    "content_type": "application\/x-www-form-urlencoded; charset=UTF-8",
+    "all_keys": [
+        "_token",
+        "content",
+        "_method"
+    ],
+    "raw_length": 28686
+}
+
+{
+    "timestamp": "2025-09-09T12:50:50.782027Z",
+    "template_id": 6,
+    "method": "POST",
+    "has_html_content": false,
+    "html_content_length": 0,
+    "has_content": true,
+    "content_length": 23303,
+    "content_type": "application\/x-www-form-urlencoded; charset=UTF-8",
+    "all_keys": [
+        "_token",
+        "content",
+        "_method"
+    ],
+    "raw_length": 28900
+}
+

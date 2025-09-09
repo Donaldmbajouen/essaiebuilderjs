@@ -7,6 +7,9 @@ use DOMXPath;
 
 class TemplateConverterService
 {
+    private $templateId;
+    private $entryDir = '';
+
     private $elementMappings = [
         'h1' => 'TextElement',
         'h2' => 'TextElement',
@@ -25,7 +28,7 @@ class TemplateConverterService
         'aside' => 'BlockElement',
         'nav' => 'BlockElement',
         'a' => 'LinkElement',
-        'img' => 'ImageElement',
+        'img' => '',
         'ul' => 'ListElement',
         'ol' => 'ListElement',
         'li' => 'TextElement',
@@ -34,8 +37,12 @@ class TemplateConverterService
         'input[type="submit"]' => 'ButtonElement',
     ];
 
-    public function convertHtmlToBuilderJS(string $html): string
+public function convertHtmlToBuilderJS(string $html, string $templateId = null, string $entryDir = ''): string
     {
+        // Store template ID for image processing
+        $this->templateId = $templateId;
+        $this->entryDir = trim($entryDir, '/');
+
         // Create DOMDocument
         $dom = new DOMDocument('1.0', 'UTF-8');
         $dom->preserveWhiteSpace = false;
@@ -149,6 +156,9 @@ class TemplateConverterService
 
     private function handleSpecialCases(DOMXPath $xpath): void
     {
+        // Handle img tags specifically
+        $this->handleImageElements($xpath);
+
         // Convert buttons styled as links
         $linkButtons = $xpath->query('//a[contains(@class, "btn") or contains(@class, "button")]');
         foreach ($linkButtons as $button) {
@@ -162,6 +172,49 @@ class TemplateConverterService
             /** @var \DOMElement $div */
             if (!$div->hasAttribute('builder-element')) {
                 $div->setAttribute('builder-element', 'TextElement');
+            }
+        }
+    }
+
+    private function handleImageElements(DOMXPath $xpath): void
+    {
+        $images = $xpath->query('//img');
+        foreach ($images as $img) {
+            /** @var \DOMElement $img */
+
+            // Ensure builder-element is set to empty string
+            $img->setAttribute('builder-element', '');
+
+            // Ensure alt attribute exists
+            if (!$img->hasAttribute('alt')) {
+                $img->setAttribute('alt', '');
+            }
+
+            // Validate and convert src attribute format
+            if ($img->hasAttribute('src')) {
+                $src = $img->getAttribute('src');
+
+                // Skip external URLs
+                if (preg_match('/^(https?:\/\/|\/\/)/', $src)) {
+                    continue;
+                }
+
+                // Handle absolute paths starting with /
+                if (strpos($src, '/') === 0) {
+                    $relative = ltrim($src, '/');
+                } else {
+                    // Handle relative paths
+                    $relative = ltrim($src, './');
+                }
+
+                // Build the correct API path
+                if ($this->templateId) {
+                    $apiPath = '/api/template/' . $this->templateId . '/' . $relative;
+                    $img->setAttribute('src', $apiPath);
+                } else {
+                    $apiPath = '/api/template/{template_id}/' . $relative;
+                    $img->setAttribute('src', $apiPath);
+                }
             }
         }
     }
@@ -207,6 +260,9 @@ class TemplateConverterService
         // 4. Optimisation : Ajouter des classes utiles pour BuilderJS
         $xpath = new DOMXPath($dom);
 
+        // Supprimer les propriétés CSS indésirables
+        $this->removeUnwantedCssProperties($xpath);
+
         // Marquer les éléments de contenu pour faciliter l'édition
         $contentElements = $xpath->query('//p | //h1 | //h2 | //h3 | //h4 | //h5 | //h6');
         foreach ($contentElements as $element) {
@@ -214,6 +270,45 @@ class TemplateConverterService
             $currentClass = $element->getAttribute('class');
             if (strpos($currentClass, 'builder-content') === false) {
                 $element->setAttribute('class', trim($currentClass . ' builder-content'));
+            }
+        }
+    }
+
+    /**
+     * Supprime les propriétés CSS indésirables des éléments
+     */
+    private function removeUnwantedCssProperties(DOMXPath $xpath): void
+    {
+        // Propriétés CSS à supprimer
+        $unwantedProperties = [
+            'height: 90vh',
+            'height:90vh'
+        ];
+
+        // Chercher tous les éléments avec un attribut style
+        $elementsWithStyle = $xpath->query('//*[@style]');
+        foreach ($elementsWithStyle as $element) {
+            /** @var \DOMElement $element */
+            $style = $element->getAttribute('style');
+            $originalStyle = $style;
+
+            // Supprimer chaque propriété indésirable
+            foreach ($unwantedProperties as $property) {
+                $style = preg_replace('/' . preg_quote($property, '/') . '\s*;?/', '', $style);
+            }
+
+            // Nettoyer les espaces et points-virgules multiples
+            $style = preg_replace('/\s*;\s*/', ';', $style);
+            $style = trim($style, '; ');
+            $style = preg_replace('/;;+/', ';', $style);
+
+            // Mettre à jour l'attribut style seulement s'il a changé
+            if ($style !== $originalStyle) {
+                if (empty($style)) {
+                    $element->removeAttribute('style');
+                } else {
+                    $element->setAttribute('style', $style);
+                }
             }
         }
     }

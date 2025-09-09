@@ -21,7 +21,15 @@ Route::get('/upload', function () {
     return view('template-upload');
 });
 
-// BuilderJS template endpoints
-Route::get('/api/template/{templateName}', [App\Http\Controllers\TemplateController::class, 'serve']);
-Route::post('/api/template/upload', [App\Http\Controllers\TemplateController::class, 'upload']);
-Route::get('/api/templates', [App\Http\Controllers\TemplateController::class, 'list']);
+// Route::get('/builder', function () {
+//     $templateName = request()->get('template');
+//     return view('builder.editor', compact('templateName'));
+// })->name('builder.editor');
+
+// Template management routes (web interface)
+Route::get('/templates', [App\Http\Controllers\TemplateController::class, 'index'])->name('templates.index');
+Route::get('/templates/create', [App\Http\Controllers\TemplateController::class, 'create'])->name('templates.create');
+Route::get('/templates/{template}', [App\Http\Controllers\TemplateController::class, 'show'])->name('templates.show');
+Route::delete('/templates/{template}', [App\Http\Controllers\TemplateController::class, 'destroy'])->name('templates.destroy');
+
+// API routes have been moved to routes/api.php for better AJAX handling

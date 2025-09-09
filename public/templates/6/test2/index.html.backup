@@ -1,0 +1,641 @@
+<!DOCTYPE html><html lang="fr"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Table Gourmande</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&amp;family=Montserrat:wght@400;500;600&amp;display=swap" rel="stylesheet">
+    <style>
+        /* Reset et styles de base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Playfair Display', serif;
+            line-height: 1.6;
+            color: #2c1810;
+        }
+
+        /* Header et Navigation */
+        header {
+            background-color: rgba(44, 24, 16, 0.95);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logo img {
+            height: 50px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 2rem;
+        }
+
+        .nav-links a {
+            color: #f4d03f;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: #ffffff;
+        }
+
+        /* Sections */
+        main {
+            margin-top: 80px;
+        }
+
+        section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('./images/IMG-20241003-WA0011.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 0;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero-content p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        }
+
+        .cta-button {
+            background-color: #f4d03f;
+            color: #2c1810;
+            border: none;
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
+            cursor: pointer;
+            border-radius: 3px;
+            transition: all 0.3s;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+        }
+
+        .cta-button:hover {
+            background-color: #f1c40f;
+            transform: translateY(-2px);
+        }
+
+        /* Menu Section */
+        .menu h2,
+        .specialites h2,
+        .reservation h2,
+        .contact h2 {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+            color: #2c1810;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            padding: 0 1rem;
+        }
+
+        .menu-category {
+            background-color: #fff;
+            padding: 2rem;
+            border-radius: 5px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+        }
+
+        .menu-category h3 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #f4d03f;
+            font-size: 1.8rem;
+        }
+
+        .menu-item {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px dashed #ddd;
+            position: relative;
+        }
+
+        .menu-item h4 {
+            color: #2c1810;
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .menu-item .price {
+            color: #f4d03f;
+            font-weight: bold;
+            font-size: 1.1rem;
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+
+        /* Sp&eacute;cialit&eacute;s Section */
+        .specialites {
+            background-color: #f9f6f1;
+        }
+
+        .specialites-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .specialite-card {
+            background-color: #fff;
+            padding: 1rem;
+            border-radius: 5px;
+            text-align: center;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .specialite-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 3px;
+            margin-bottom: 1rem;
+        }
+
+        .specialite-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* R&eacute;servation Section */
+        .reservation {
+            background-color: #2c1810;
+            color: #fff;
+        }
+
+        #reservation-form {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        #reservation-form input,
+        #reservation-form textarea {
+            width: 100%;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border: none;
+            border-radius: 3px;
+            background-color: rgba(255,255,255,0.1);
+            color: #fff;
+        }
+
+        #reservation-form input::placeholder,
+        #reservation-form textarea::placeholder {
+            color: rgba(255,255,255,0.7);
+        }
+
+        #reservation-form button {
+            background-color: #f4d03f;
+            color: #2c1810;
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        #reservation-form button:hover {
+            background-color: #f1c40f;
+        }
+
+        /* Contact Section */
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .info-card {
+            background-color: #fff;
+            padding: 2rem;
+            border-radius: 5px;
+            text-align: center;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+        }
+
+        .info-card h3 {
+            color: #f4d03f;
+            margin-bottom: 1.5rem;
+        }
+
+        .info-card p {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #2c1810;
+            color: #f4d03f;
+            text-align: center;
+            padding: 1rem 0;
+        }
+
+        /* Menu Burger et Responsive */
+        .burger {
+            display: none;
+            cursor: pointer;
+        }
+
+        .burger div {
+            width: 25px;
+            height: 3px;
+            background-color: #f4d03f;
+            margin: 5px;
+            transition: all 0.3s ease;
+        }
+
+        @media screen and (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                right: -100%;
+                top: 80px;
+                height: calc(100vh - 80px);
+                background-color: rgba(44, 24, 16, 0.95);
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
+                transition: right 0.5s ease;
+                padding: 2rem 0;
+            }
+
+            .nav-links li {
+                margin: 2rem 0;
+            }
+
+            .burger {
+                display: block;
+            }
+
+            .nav-active {
+                right: 0;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-content p {
+                font-size: 1.2rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animation du burger */
+        .toggle .line1 {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+
+        .toggle .line2 {
+            opacity: 0;
+        }
+
+        .toggle .line3 {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+
+        /* Animations au d&eacute;filement */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+
+                    <style font-name="MS PMincho">
+                        @font-face {
+                            font-family: "MS PMincho";
+                            src: url(/vendor/builderjs/font/ms-pmincho.ttf);
+                        }
+                    </style>
+
+                    <style font-name="MS Mincho">
+                        @font-face {
+                            font-family: "MS Mincho";
+                            src: url(/vendor/builderjs/font/ms-mincho.ttf);
+                        }
+                    </style>
+                <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"><link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+
+
+
+
+
+            
+                
+            </head>
+<body class="builderjs-layout">
+
+
+
+
+
+
+
+
+<div builder-element="PageElement" style="padding: 20px;" class="">
+<nav builder-element="BlockElement" class="">
+            <div class="logo" builder-element="BlockElement">
+                <img src="/api/template/6/images/Sc.png" alt="Logo Restaurant" builder-element="">
+            </div>
+            <ul class="nav-links" builder-element="ListElement">
+                <li builder-element="TextElement" class="">Home</li>
+
+
+                <li builder-element="TextElement"><a href="#reservation" builder-element="LinkElement">Réservation</a></li>
+                <li builder-element="TextElement" class=""><a href="#contact" builder-element="LinkElement">Contact</a></li>
+            </ul>
+            <div class="burger" builder-element="BlockElement">
+                <div class="line1" builder-element="BlockElement"></div>
+                <div class="line2" builder-element="BlockElement"></div>
+                <div class="line3" builder-element="BlockElement"></div>
+            </div>
+        </nav><main builder-element="BlockElement">
+        <section id="accueil" class="hero" builder-element="BlockElement">
+            <div class="hero-content" builder-element="BlockElement">
+                <h1 class="builder-content" builder-element="TextElement">La Table Gourmande</h1>
+                <p class="builder-content" builder-element="TextElement">Une expérience gastronomique unique au cœur de la ville</p>
+                <button class="cta-button" onclick="location.href='#reservation'" builder-element="ButtonElement">Réserver une table</button>
+            </div>
+        </section>
+
+        <section id="menu" class="menu" builder-element="BlockElement">
+            <h2 class="builder-content" builder-element="TextElement">Notre Menu</h2>
+            <div class="menu-grid" builder-element="BlockElement">
+                <div class="menu-category fade-in visible" builder-element="BlockElement">
+                    <h3 class="builder-content" builder-element="TextElement">Entrées</h3>
+                    <div class="menu-item" builder-element="BlockElement">
+                        <h4 class="builder-content" builder-element="TextElement">Salade Gourmande</h4>
+                        <p class="builder-content" builder-element="TextElement">Mesclun, foie gras, magret fumé, noix</p>
+                        <span class="price" builder-element="TextElement">16€</span>
+                    </div>
+                    <div class="menu-item" builder-element="BlockElement">
+                        <h4 class="builder-content" builder-element="TextElement">Velouté de Saison</h4>
+                        <p class="builder-content" builder-element="TextElement">Légumes de saison et crème fraîche</p>
+                        <span class="price" builder-element="TextElement">12€</span>
+                    </div>
+                </div>
+                <div class="menu-category fade-in visible" builder-element="BlockElement">
+                    <h3 class="builder-content" builder-element="TextElement">Plats</h3>
+                    <div class="menu-item" builder-element="BlockElement">
+                        <h4 class="builder-content" builder-element="TextElement">Filet de Bœuf</h4>
+                        <p class="builder-content" builder-element="TextElement">Sauce aux morilles, gratin dauphinois</p>
+                        <span class="price" builder-element="TextElement">28€</span>
+                    </div>
+                    <div class="menu-item" builder-element="BlockElement">
+                        <h4 class="builder-content" builder-element="TextElement">Poisson du Jour</h4>
+                        <p class="builder-content" builder-element="TextElement">Selon arrivage, légumes de saison</p>
+                        <span class="price" builder-element="TextElement">24€</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="specialites" class="specialites" builder-element="BlockElement">
+            <h2 class="builder-content" builder-element="TextElement">Nos Spécialités</h2>
+            <div class="specialites-grid" builder-element="BlockElement">
+                <div class="specialite-card fade-in" builder-element="BlockElement">
+                    <img src="/api/template/6/images/IMG-20241003-WA0008.jpg" alt="Plat Signature" builder-element="">
+                    <h3 class="builder-content" builder-element="TextElement">Plat Signature</h3>
+                    <p class="builder-content" builder-element="TextElement">Notre fameux filet de bœuf Wellington</p>
+                </div>
+                <div class="specialite-card fade-in" builder-element="BlockElement">
+                    <img src="/api/template/6/images/IMG-20241003-WA0010.jpg" alt="Dessert Maison" builder-element="">
+                    <h3 class="builder-content" builder-element="TextElement">Dessert Maison</h3>
+                    <p class="builder-content" builder-element="TextElement">Soufflé au chocolat et sa glace vanille</p>
+                </div>
+                <div class="specialite-card fade-in" builder-element="BlockElement">
+                    <img src="/api/template/6/images/IMG-20241004-WA0003.jpg" alt="Vin Sélection" builder-element="">
+                    <h3 class="builder-content" builder-element="TextElement">Carte des Vins</h3>
+                    <p class="builder-content" builder-element="TextElement">Une sélection pointue de grands crus</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="reservation" class="reservation" builder-element="BlockElement">
+            <h2 class="builder-content" builder-element="TextElement">Réserver une Table</h2>
+            <form id="reservation-form">
+                <div class="form-row" builder-element="BlockElement">
+                    <input type="text" placeholder="Votre nom" required="">
+                    <input type="email" placeholder="Votre email" required="">
+                </div>
+                <div class="form-row" builder-element="BlockElement">
+                    <input type="date" required="" min="2025-09-10">
+                    <input type="time" required="">
+                </div>
+                <div class="form-row" builder-element="BlockElement">
+                    <input type="number" placeholder="Nombre de personnes" min="1" max="10" required="">
+                    <input type="tel" placeholder="Téléphone" required="">
+                </div>
+                <textarea placeholder="Demandes spéciales"></textarea>
+                <button type="submit" builder-element="ButtonElement">Réserver</button>
+            </form>
+        </section>
+
+        <section id="contact" class="contact" builder-element="BlockElement">
+            <h2 class="builder-content" builder-element="TextElement">Contact &amp; Horaires</h2>
+            <div class="contact-info" builder-element="BlockElement">
+                <div class="info-card fade-in" builder-element="BlockElement">
+                    <h3 class="builder-content" builder-element="TextElement">Horaires d'Ouverture</h3>
+                    <p class="builder-content" builder-element="TextElement">Mardi - Samedi : 12h00 - 14h30</p>
+                    <p class="builder-content" builder-element="TextElement">19h00 - 22h30</p>
+                    <p class="builder-content" builder-element="TextElement">Dimanche : 12h00 - 15h00</p>
+                    <p class="builder-content" builder-element="TextElement">Fermé le lundi</p>
+                </div>
+                <div class="info-card fade-in" builder-element="BlockElement">
+                    <h3 class="builder-content" builder-element="TextElement">Coordonnées</h3>
+                    <p class="builder-content" builder-element="TextElement">123 rue de la Gastronomie</p>
+                    <p class="builder-content" builder-element="TextElement">75000 Paris</p>
+                    <p class="builder-content" builder-element="TextElement">Tél : 01 23 45 67 89</p>
+                    <p class="builder-content" builder-element="TextElement">Email : contact@tablegourmande.fr</p>
+                </div>
+            </div>
+        </section>
+    </main><footer builder-element="BlockElement">
+        <p class="builder-content" builder-element="TextElement">© 2025 La Table Gourmande. Tous droits réservés.</p>
+    </footer><script>
+        // Navigation responsive
+        const navSlide = () => {
+            const burger = document.querySelector('.burger');
+            const nav = document.querySelector('.nav-links');
+            const navLinks = document.querySelectorAll('.nav-links li');
+
+            burger.addEventListener('click', () => {
+                // Toggle Nav
+                nav.classList.toggle('nav-active');
+
+                // Animation des liens
+                navLinks.forEach((link, index) => {
+                    if (link.style.animation) {
+                        link.style.animation = '';
+                    } else {
+                        link.style.animation = `navLinkFade 0.5s ease forwards ${index / 7 + 0.3}s`;
+                    }
+                });
+
+                // Animation du burger
+                burger.classList.toggle('toggle');
+            });
+        }
+
+        // Smooth scroll pour les liens de navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+
+                    // Fermer le menu mobile si ouvert
+                    const nav = document.querySelector('.nav-links');
+                    if (nav.classList.contains('nav-active')) {
+                        nav.classList.remove('nav-active');
+                        document.querySelector('.burger').classList.remove('toggle');
+                    }
+                }
+            });
+        });
+
+        // Gestion du formulaire de r&eacute;servation
+        const reservationForm = document.getElementById('reservation-form');
+        if (reservationForm) {
+            reservationForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                // R&eacute;cup&eacute;ration des valeurs du formulaire
+                const formData = new FormData(this);
+                const reservationData = {};
+                formData.forEach((value, key) => reservationData[key] = value);
+
+                // V&eacute;rification de la disponibilit&eacute; (simulation)
+                const isAvailable = Math.random() > 0.3; // 70% de chances d'avoir une table disponible
+
+                if (isAvailable) {
+                    alert('Votre r&eacute;servation a &eacute;t&eacute; confirm&eacute;e ! Nous vous attendons avec impatience.');
+                    this.reset();
+                } else {
+                    alert('D&eacute;sol&eacute;, nous sommes complets pour cette date et cet horaire. Veuillez choisir un autre moment.');
+                }
+            });
+        }
+
+        // Animation au d&eacute;filement
+        const observeElements = () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.menu-category, .specialite-card, .info-card').forEach(element => {
+                element.classList.add('fade-in');
+                observer.observe(element);
+            });
+        };
+
+        // Initialisation
+        document.addEventListener('DOMContentLoaded', () => {
+            navSlide();
+            observeElements();
+
+            // Configuration du formulaire de r&eacute;servation
+            const dateInput = document.querySelector('input[type="date"]');
+            if (dateInput) {
+                const today = new Date();
+                const tomorrow = new Date(today);
+                tomorrow.setDate(tomorrow.getDate() + 1);
+                dateInput.min = tomorrow.toISOString().split('T')[0];
+            }
+
+            const timeInput = document.querySelector('input[type="time"]');
+            if (timeInput) {
+                timeInput.addEventListener('change', function() {
+                    const time = this.value;
+                    const hour = parseInt(time.split(':')[0]);
+
+                    if ((hour < 12 || (hour > 14 && hour < 19) || hour >= 22)) {
+                        alert('Veuillez choisir un horaire entre 12h00-14h30 ou 19h00-22h00');
+                        this.value = '';
+                    }
+                });
+            }
+        });
+    </script>
+</div>
+
+
+
+</body></html>
